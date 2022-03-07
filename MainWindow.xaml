@@ -37,7 +37,13 @@
 
         <TextBlock
             Text="{Binding Path=Imię}"
+            Grid.Column="0"
+            Grid.Row="1"
+            />
+        <TextBlock
+            Text="{Binding Path=Format}"
             Grid.Column="1"
+            Grid.ColumnSpan="2"
             Grid.Row="1"
             />
     </Grid>

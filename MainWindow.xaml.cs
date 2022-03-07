@@ -26,5 +26,10 @@ namespace NET_INIS4_PR2._2_z2
             DataContext = dane;
             InitializeComponent();
         }
+
+        private void NaszKlikacz(object sender, RoutedEventArgs e)
+        {
+            dane.Liczba = "0";
+        }
     }
 }

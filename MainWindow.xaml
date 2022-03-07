@@ -62,5 +62,10 @@
             Grid.Row="2"
             Text="{Binding Path=Liczba}"
             />
+        <Button
+            Grid.Column="2"
+            Grid.Row="3"
+            Click="NaszKlikacz"
+            >Ustaw 0</Button>
     </Grid>
 </Window>

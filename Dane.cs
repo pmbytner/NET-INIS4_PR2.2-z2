@@ -10,6 +10,15 @@ namespace NET_INIS4_PR2._2_z2
 {
     public class Dane : INotifyPropertyChanged
     {
+        int liczba = 12;
+        public string Liczba {
+            get { return Convert.ToString(liczba); }
+            set
+            {
+                liczba = Convert.ToInt32(value);
+                OnPropertyChanged();
+            }
+        }
         string imię = "Przemek";
         public string Imię
         {

@@ -46,5 +46,21 @@
             Grid.ColumnSpan="2"
             Grid.Row="1"
             />
+
+        <Label
+            Grid.Row="2"
+            >Jakaś liczba</Label>
+        <TextBox
+            Grid.Column="1"
+            Grid.Row="2"
+            Text="{Binding
+                Path=Liczba
+            }"
+            />
+        <TextBlock
+            Grid.Column="2"
+            Grid.Row="2"
+            Text="{Binding Path=Liczba}"
+            />
     </Grid>
 </Window>

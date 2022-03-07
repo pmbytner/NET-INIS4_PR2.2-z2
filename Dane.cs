@@ -10,30 +10,103 @@ namespace NET_INIS4_PR2._2_z2
 {
     public class Dane : INotifyPropertyChanged
     {
-        int liczba = 12;
-        public string Liczba {
-            get { return Convert.ToString(liczba); }
-            set
-            {
-                liczba = Convert.ToInt32(value);
-                OnPropertyChanged();
-            }
-        }
-        string imię = "Przemek";
-        public string Imię
+        bool
+            flagaUłamka = false,
+            flagaPrzecinka = false,
+            flagaWyniku = false,
+            flagaUjemnegoZnaku = false
+            ;
+        double wynik = 0;
+        double?
+            pierwsza = null,
+            druga = null
+            ;
+        string działanie = null;
+        public string Wynik 
         {
-            get { return imię; }
+            get { 
+                if(flagaUjemnegoZnaku && wynik == 0)
+                    return "-" + Convert.ToString(wynik);
+                else
+                    return Convert.ToString(wynik);
+            }
             set
             {
-                imię = value;
+                wynik = Convert.ToDouble(value);
                 OnPropertyChanged();
-                OnPropertyChanged("Format");
             }
         }
-        public string Format {
-            get {
-                return $"Podane imię to {Imię}.";
-            } 
+
+        public void Dopisz(string znak)
+        {
+            if (flagaWyniku)
+                Zeruj();
+            if (znak == ",")
+                if (flagaUłamka)
+                    ;
+                else
+                    flagaPrzecinka = true;
+            else if (flagaPrzecinka)
+            {
+                Wynik += "," + znak;
+                flagaPrzecinka = false;
+                flagaUłamka = true;
+            }
+            else
+                Wynik += znak;
+        }
+        public void ZmieńZnak()
+        {
+            if (flagaWyniku)
+                Zeruj();
+            flagaUjemnegoZnaku = !flagaUjemnegoZnaku;
+            Wynik = Convert.ToString(-wynik);
+        }
+        public void Zeruj()
+        {
+            flagaPrzecinka = flagaPrzecinka = flagaWyniku = flagaUjemnegoZnaku = false;
+            druga = null;
+            Wynik = "0";
+        }
+        public void Resetuj()
+        {
+            Zeruj();
+            pierwsza = null;
+            działanie = null;
+        }
+        public void Działanie(string działanie)
+        {
+            if (pierwsza == null)
+            {
+                pierwsza = wynik;
+                this.działanie = działanie;
+                Zeruj();
+            }
+            else
+            {
+                druga = wynik;
+                Wykonaj();
+                this.działanie = działanie;
+            }
+        }
+        public void Wykonaj()
+        {
+            if (działanie == null)
+                return;
+            else if (druga == null)
+                druga = wynik;
+
+            if (działanie == "+")
+                Wynik = Convert.ToString(pierwsza + druga);
+            else if (działanie == "-")
+                Wynik = Convert.ToString(pierwsza - druga);
+            else if (działanie == "*")
+                Wynik = Convert.ToString(pierwsza * druga);
+            else if (działanie == "/")
+                Wynik = Convert.ToString(pierwsza / druga);
+
+            flagaWyniku = true;
+            pierwsza = wynik;
         }
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged([CallerMemberName] string name = null)

@@ -27,9 +27,33 @@ namespace NET_INIS4_PR2._2_z2
             InitializeComponent();
         }
 
-        private void NaszKlikacz(object sender, RoutedEventArgs e)
+        private void DopiszZnak(object sender, RoutedEventArgs e)
         {
-            dane.Liczba = "0";
+            dane.Dopisz(
+                (string)((Button)sender).Content
+                );
+        }
+
+        private void ZmieńZnak(object sender, RoutedEventArgs e)
+        {
+            dane.ZmieńZnak();
+        }
+
+        private void Resetuj(object sender, RoutedEventArgs e)
+        {
+            dane.Resetuj();
+        }
+
+        private void RównaSię(object sender, RoutedEventArgs e)
+        {
+            dane.Wykonaj();
+        }
+
+        private void Działanie(object sender, RoutedEventArgs e)
+        {
+            dane.Działanie(
+                (string)((Button)sender).Content
+                );
         }
     }
 }

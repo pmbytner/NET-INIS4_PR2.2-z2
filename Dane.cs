@@ -22,7 +22,7 @@ namespace NET_INIS4_PR2._2_z2
             druga = null
             ;
         string działanie = null;
-        public string Wynik 
+        public string Wynik
         {
             get { 
                 if(flagaUjemnegoZnaku && wynik == 0)
